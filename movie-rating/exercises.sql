@@ -32,10 +32,6 @@ select title, rating_spread from Movie natural join (select *, max-min as rating
 /* Find the difference between the average rating of movies released before 1980 and the average rating of movies released after 1980.
  (Make sure to calculate the average rating for each movie, then the average of those averages for movies before 1980 and movies after.
   Don't just calculate the overall average rating before and after 1980.) */
-
-calculate the average rating for each movie,
-
-then the average of those averages for movies before 1980
-select avg(avg) as pre from Movie natural join (select *, avg(stars) as avg from Rating group by mID) where year < 1980;
-
-select pre-post from (select avg(avg) as pre from Movie natural join (select *, avg(stars) as avg from Rating group by mID) where year < 1980), (select avg(avg) as post from Movie natural join (select *, avg(stars) as avg from Rating group by mID) where year >= 1980);
+select pre-post from (select avg(avg) as pre from Movie natural join (select *, avg(stars) as avg from Rating group by mID) 
+	where year < 1980), (select avg(avg) as post from Movie natural join (select *, avg(stars) as avg from Rating group by mID)
+	where year >= 1980);
